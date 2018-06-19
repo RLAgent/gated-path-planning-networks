@@ -267,7 +267,7 @@ If you found this code useful in your research, please cite:
 @inproceedings{gppn2018,
   author    = {Lisa Lee and Emilio Parisotto and Devendra Chaplot and Eric Xing and Ruslan Salakhutdinov},
   title     = {Gated Path Planning Networks},
-  booktitle = {Proceedings of the 35th International Conference on Maching Learning (ICML 2018)},
+  booktitle = {Proceedings of the 35th International Conference on Machine Learning (ICML 2018)},
   year      = {2018}
 }
 ```
