@@ -1,26 +1,48 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import abc
+import sys
 
 
-class Mechanism(abc.ABC):
-    """Base class for maze transition mechanisms."""
+if (sys.version_info > (3, 0)):
+    class Mechanism(abc.ABC):
+        """Base class for maze transition mechanisms."""
 
-    def __init__(self, num_actions, num_orient):
-        self.num_actions = num_actions
-        self.num_orient = num_orient
+        def __init__(self, num_actions, num_orient):
+            self.num_actions = num_actions
+            self.num_orient = num_orient
 
-    @abc.abstractmethod
-    def neighbors_func(self, maze, p_orient, p_y, p_x):
-        """Computes next states for each action."""
+        @abc.abstractmethod
+        def neighbors_func(self, maze, p_orient, p_y, p_x):
+            """Computes next states for each action."""
 
-    @abc.abstractmethod
-    def invneighbors_func(self, maze, p_orient, p_y, p_x):
-        """Computes previous states for each action."""
+        @abc.abstractmethod
+        def invneighbors_func(self, maze, p_orient, p_y, p_x):
+            """Computes previous states for each action."""
 
-    @abc.abstractmethod
-    def print_policy(self, goal, policy):
-        """Prints the given policy."""
+        @abc.abstractmethod
+        def print_policy(self, goal, policy):
+            """Prints the given policy."""
+else:
+    class Mechanism:
+        """Base class for maze transition mechanisms."""
+        __metaclass__ = abc.ABCMeta
+
+        def __init__(self, num_actions, num_orient):
+            self.num_actions = num_actions
+            self.num_orient = num_orient
+
+        @abc.abstractmethod
+        def neighbors_func(self, maze, p_orient, p_y, p_x):
+            """Computes next states for each action."""
+
+        @abc.abstractmethod
+        def invneighbors_func(self, maze, p_orient, p_y, p_x):
+            """Computes previous states for each action."""
+
+        @abc.abstractmethod
+        def print_policy(self, goal, policy):
+            """Prints the given policy."""
 
 
 class DifferentialDrive(Mechanism):

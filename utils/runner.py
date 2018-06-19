@@ -1,5 +1,5 @@
-import importlib
 import numpy as np
+import importlib
 
 import torch
 from torch.autograd import Variable
@@ -26,7 +26,6 @@ class Runner():
     The Runner class runs a planner model on a given dataset and records
     statistics such as loss, prediction error, % Optimal, and % Success.
     """
-
     def __init__(self, args, mechanism):
         """
         Args:
@@ -134,7 +133,7 @@ class Runner():
             percent_optimal = percent_optimal / float(batch_size)
             percent_successful = percent_successful / float(batch_size)
 
-        return loss.data.item(), batch_error, percent_optimal, percent_successful
+        return loss.data[0], batch_error, percent_optimal, percent_successful
 
     def _run(self, model, dataloader, train=False, batch_size=-1,
              store_best=False):
@@ -207,8 +206,8 @@ class Runner():
     
                 # Clip the gradient norm
                 if self.clip_grad:
-                    torch.nn.utils.clip_grad_norm_(model.parameters(),
-                                                   self.clip_grad)
+                    torch.nn.utils.clip_grad_norm(model.parameters(),
+                                                  self.clip_grad)
 
                 # Update parameters
                 self.optimizer.step()
@@ -237,8 +236,8 @@ class Runner():
                 weight_norm += torch.norm(p)**2
                 if p.grad is not None:
                     grad_norm += torch.norm(p.grad)**2
-            info["weight_norm"] = float(np.sqrt(weight_norm.cpu().data.numpy().item()))
-            info["grad_norm"] = float(np.sqrt(grad_norm.cpu().data.numpy().item()))
+            info["weight_norm"] = float(np.sqrt(weight_norm.cpu().data.numpy()[0]))
+            info["grad_norm"] = float(np.sqrt(grad_norm.cpu().data.numpy()[0]))
 
         if store_best:
             # Was the validation accuracy greater than the best one?
