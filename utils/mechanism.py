@@ -253,7 +253,7 @@ class Moore(Mechanism):
             self._northeast(maze, p_orient, p_y, p_x),
         ]
 
-    def print_policy(maze, goal, policy):
+    def print_policy(self, maze, goal, policy):
         action2str = ["↑", "→", "←", "↓", "↗", "↖", "↘", "↙"]
         for o in range(self.num_orient):
             for y in range(policy.shape[1]):
