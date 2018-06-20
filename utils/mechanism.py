@@ -19,7 +19,7 @@ class Mechanism(abc.ABC):
         """Computes previous states for each action."""
 
     @abc.abstractmethod
-    def print_policy(self, goal, policy):
+    def print_policy(self, maze, goal, policy):
         """Prints the given policy."""
 
 
