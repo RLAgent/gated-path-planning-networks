@@ -100,7 +100,7 @@ class DifferentialDrive(Mechanism):
             self._turnright(p_orient, p_y, p_x),
         ]
 
-    def print_policy(self, goal, policy):
+    def print_policy(self, maze, goal, policy):
         orient2str = ["↑", "→", "←", "↓"]
         action2str = ["F", "R", "L"]
         for o in range(self.num_orient):
@@ -161,9 +161,9 @@ class NorthEastWestSouth(Mechanism):
             self._north(maze, p_orient, p_y, p_x),
         ]
 
-    def print_policy(self, goal, policy):
+    def print_policy(self, maze, goal, policy):
         action2str = ["↑", "→", "←", "↓"]
-        for o in range(MechanismNEWS.num_orient):
+        for o in range(self.num_orient):
             for y in range(policy.shape[1]):
                 for x in range(policy.shape[2]):
                     if (o, y, x) == goal:
@@ -255,7 +255,7 @@ class Moore(Mechanism):
 
     def print_policy(maze, goal, policy):
         action2str = ["↑", "→", "←", "↓", "↗", "↖", "↘", "↙"]
-        for o in range(MechanismMoore.num_orient):
+        for o in range(self.num_orient):
             for y in range(policy.shape[1]):
                 for x in range(policy.shape[2]):
                     if (o, y, x) == goal:
